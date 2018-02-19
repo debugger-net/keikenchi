@@ -73,12 +73,8 @@ function update() {
   history.replaceState(null, document.title, baseurl + search);
 
   // Update link
-  const permalink = `https://kkn.snack.studio/map.html?d=${keikenData}`;
-  const imageBase = `https://kkni.snack.studio/image/${keikenData}.`;
+  const permalink = `https://debugger-net.github.io/keikenchi-kor/map.html?d=${keikenData}`;
   $(".links .permalink").val(permalink);
-  $(".links .image-svg").val(imageBase + "svg");
-  $(".links .image-jpg").val(imageBase + "jpg");
-  $(".links .image-png").val(imageBase + "png");
 }
 
 function onSvgPathClick() {
@@ -95,17 +91,16 @@ $(function() {
   // Check initial state
   let initial = [];
   const search = location.search;
-  const match = search.match(/[?&]d=([0-5]{47})(?:$|&)/);
+  const match = search.match(/[?&]d=([0-5]{18})(?:$|&)/);
   if(match) initial = match[1].split("").map(c => parseInt(c));
-  else initial = new Array(47).fill(0);
+  else initial = new Array(18).fill(0);
 
   // Make DOM and set to initial state
-  const perColumn = Math.ceil(nPrefs / 3);
+  const perColumn = Math.ceil(nPrefs / 2);
   for(let i = 0 ; i < perColumn ; i++) {
     const $tr = $("<tr>");
     $buildTr($tr, initial, i);
     $buildTr($tr, initial, i + (perColumn * 1));
-    $buildTr($tr, initial, i + (perColumn * 2));
 
     $(".table-prefectures tbody").append($tr);
   }
